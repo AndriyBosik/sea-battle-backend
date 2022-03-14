@@ -18,7 +18,12 @@ public class DefaultUserService implements UserService {
 
     @Override
     public Optional<User> findByNickname(String nickname) {
-        UserEntity entity = userRepository.findByNickname(nickname);
+        UserEntity entity = userRepository.findByNicknameIgnoreCase(nickname);
         return entity == null ? Optional.empty() : Optional.of(userMapper.toModel(entity));
+    }
+
+    @Override
+    public void createUser(User user) {
+        userRepository.save(userMapper.toUnsavedEntity(user));
     }
 }
