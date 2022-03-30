@@ -1,5 +1,6 @@
 package com.example.seabattle.controller;
 
+import com.example.seabattle.model.UserStats;
 import com.example.seabattle.model.User;
 import com.example.seabattle.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -21,5 +22,10 @@ public class UserController {
     @PostMapping
     public void createUser(@RequestBody User user) {
         userService.createUser(user);
+    }
+
+    @GetMapping("/{nickname}/stats")
+    public Optional<UserStats> getUserStats(@PathVariable String nickname) {
+        return userService.getUserWithStats(nickname);
     }
 }

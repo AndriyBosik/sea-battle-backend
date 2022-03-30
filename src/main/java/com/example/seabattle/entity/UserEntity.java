@@ -17,4 +17,10 @@ public class UserEntity {
 
     @Column(name = "nickname", nullable = false)
     private String nickname;
+
+    @Column(name = "score")
+    private int score;
+
+    @Column(name = "coins")
+    private int coins;
 }

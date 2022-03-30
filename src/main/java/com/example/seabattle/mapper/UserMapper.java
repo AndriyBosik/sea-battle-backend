@@ -1,16 +1,20 @@
 package com.example.seabattle.mapper;
 
 import com.example.seabattle.entity.UserEntity;
+import com.example.seabattle.entity.projection.UserStatsProjection;
 import com.example.seabattle.model.User;
+import com.example.seabattle.model.UserStats;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
 public interface UserMapper {
-    User toModel(UserEntity entity);
+    User toUser(UserEntity entity);
 
-    UserEntity toEntity(User model);
+    UserEntity toUserEntity(User model);
 
     @Mapping(target = "id", ignore = true)
     UserEntity toUnsavedEntity(User model);
+
+    UserStats toUserStats(UserStatsProjection userStatsProjection);
 }
