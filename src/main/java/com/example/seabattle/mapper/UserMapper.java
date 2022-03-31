@@ -1,7 +1,9 @@
 package com.example.seabattle.mapper;
 
 import com.example.seabattle.entity.UserEntity;
+import com.example.seabattle.entity.projection.RatedUserProjection;
 import com.example.seabattle.entity.projection.UserStatsProjection;
+import com.example.seabattle.model.RatedUser;
 import com.example.seabattle.model.User;
 import com.example.seabattle.model.UserStats;
 import org.mapstruct.Mapper;
@@ -17,4 +19,6 @@ public interface UserMapper {
     UserEntity toUnsavedEntity(User model);
 
     UserStats toUserStats(UserStatsProjection userStatsProjection);
+
+    RatedUser toRatedUser(RatedUserProjection ratedUserProjection);
 }
