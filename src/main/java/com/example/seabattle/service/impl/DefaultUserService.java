@@ -1,16 +1,19 @@
 package com.example.seabattle.service.impl;
 
+import com.example.seabattle.dto.PageDto;
+import com.example.seabattle.dto.RatedUserDto;
+import com.example.seabattle.dto.UserDto;
+import com.example.seabattle.dto.UserStatsDto;
 import com.example.seabattle.entity.UserEntity;
+import com.example.seabattle.entity.projection.RatedUserProjection;
 import com.example.seabattle.mapper.UserMapper;
-import com.example.seabattle.model.RatedUser;
-import com.example.seabattle.model.User;
-import com.example.seabattle.model.UserStats;
 import com.example.seabattle.repository.UserRepository;
 import com.example.seabattle.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -21,25 +24,28 @@ public class DefaultUserService implements UserService {
     private final UserRepository userRepository;
 
     @Override
-    public Optional<User> findByNickname(String nickname) {
+    public Optional<UserDto> findByNickname(String nickname) {
         UserEntity entity = userRepository.findByNicknameIgnoreCase(nickname);
         return Optional.ofNullable(userMapper.toUser(entity));
     }
 
     @Override
-    public void createUser(User user) {
-        userRepository.save(userMapper.toUnsavedEntity(user));
+    public void createUser(UserDto userDto) {
+        userRepository.save(userMapper.toUnsavedEntity(userDto));
     }
 
     @Override
-    public Optional<UserStats> getUserWithStats(String nickname) {
+    public Optional<UserStatsDto> getUserWithStats(String nickname) {
         return Optional.ofNullable(userMapper.toUserStats(userRepository.findStatsByNickname(nickname)));
     }
 
     @Override
-    public List<RatedUser> getRatedUsers() {
-        return userRepository.findRatedUsersByOrderByScoreDesc().stream()
-                .map(userMapper::toRatedUser)
-                .collect(Collectors.toList());
+    public PageDto<RatedUserDto> getRatedUsers(PageRequest pageRequest) {
+        Page<RatedUserProjection> page = userRepository.findRatedUsersBy(pageRequest);
+        return new PageDto<>(
+            page.getTotalPages(),
+            page.map(userMapper::toRatedUser).stream()
+                    .collect(Collectors.toList())
+        );
     }
 }

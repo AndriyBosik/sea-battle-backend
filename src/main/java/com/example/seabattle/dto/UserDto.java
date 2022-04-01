@@ -1,11 +1,11 @@
-package com.example.seabattle.model;
+package com.example.seabattle.dto;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class User {
+public class UserDto {
     private Long id;
     private String nickname;
 }

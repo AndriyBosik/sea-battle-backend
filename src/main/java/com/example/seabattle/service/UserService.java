@@ -1,18 +1,19 @@
 package com.example.seabattle.service;
 
-import com.example.seabattle.model.RatedUser;
-import com.example.seabattle.model.User;
-import com.example.seabattle.model.UserStats;
+import com.example.seabattle.dto.PageDto;
+import com.example.seabattle.dto.RatedUserDto;
+import com.example.seabattle.dto.UserDto;
+import com.example.seabattle.dto.UserStatsDto;
+import org.springframework.data.domain.PageRequest;
 
-import java.util.List;
 import java.util.Optional;
 
 public interface UserService {
-    Optional<User> findByNickname(String nickname);
+    Optional<UserDto> findByNickname(String nickname);
 
-    void createUser(User user);
+    void createUser(UserDto userDto);
 
-    Optional<UserStats> getUserWithStats(String nickname);
+    Optional<UserStatsDto> getUserWithStats(String nickname);
 
-    List<RatedUser> getRatedUsers();
+    PageDto<RatedUserDto> getRatedUsers(PageRequest pageRequest);
 }
