@@ -1,13 +1,11 @@
 package com.example.seabattle.controller;
 
-import com.example.seabattle.dto.PageDto;
-import com.example.seabattle.dto.RatedUserDto;
-import com.example.seabattle.dto.UserDto;
-import com.example.seabattle.dto.UserStatsDto;
+import com.example.seabattle.dto.*;
 import com.example.seabattle.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -39,5 +37,11 @@ public class UserController {
             @RequestParam("size") int size
     ) {
         return userService.getRatedUsers(PageRequest.of(pageNumber, size, Sort.by("score").descending()));
+    }
+
+    @PatchMapping("/username")
+    public ResponseEntity<String> updateNickname(@RequestBody NicknameDto nicknameDto) {
+        userService.updateNickname(nicknameDto);
+        return ResponseEntity.ok("Updated successfully");
     }
 }

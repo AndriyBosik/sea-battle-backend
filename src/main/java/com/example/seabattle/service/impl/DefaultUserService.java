@@ -1,9 +1,6 @@
 package com.example.seabattle.service.impl;
 
-import com.example.seabattle.dto.PageDto;
-import com.example.seabattle.dto.RatedUserDto;
-import com.example.seabattle.dto.UserDto;
-import com.example.seabattle.dto.UserStatsDto;
+import com.example.seabattle.dto.*;
 import com.example.seabattle.entity.UserEntity;
 import com.example.seabattle.entity.projection.RatedUserProjection;
 import com.example.seabattle.mapper.UserMapper;
@@ -13,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -47,5 +45,11 @@ public class DefaultUserService implements UserService {
             page.map(userMapper::toRatedUser).stream()
                     .collect(Collectors.toList())
         );
+    }
+
+    @Transactional
+    @Override
+    public void updateNickname(NicknameDto nicknameDto) {
+        userRepository.updateUsername(nicknameDto.getOldNickname(), nicknameDto.getNewNickname());
     }
 }
