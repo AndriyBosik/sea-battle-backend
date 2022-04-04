@@ -14,34 +14,34 @@ import java.util.Optional;
 @RequestMapping("/api/users")
 @RequiredArgsConstructor
 public class UserController {
-    private final UserService userService;
+  private final UserService userService;
 
-    @GetMapping("/{nickname}")
-    public Optional<UserDto> findByNickname(@PathVariable String nickname) {
-        return userService.findByNickname(nickname);
-    }
+  @GetMapping("/{nickname}")
+  public Optional<UserDto> findByNickname(@PathVariable String nickname) {
+    return userService.findByNickname(nickname);
+  }
 
-    @PostMapping
-    public void createUser(@RequestBody UserDto userDto) {
-        userService.createUser(userDto);
-    }
+  @PostMapping
+  public void createUser(@RequestBody UserDto userDto) {
+    userService.createUser(userDto);
+  }
 
-    @GetMapping("/{nickname}/stats")
-    public Optional<UserStatsDto> getUserStats(@PathVariable String nickname) {
-        return userService.getUserWithStats(nickname);
-    }
+  @GetMapping("/{nickname}/stats")
+  public Optional<UserStatsDto> getUserStats(@PathVariable String nickname) {
+    return userService.getUserWithStats(nickname);
+  }
 
-    @GetMapping("/rated")
-    public PageDto<RatedUserDto> getRatedUsers(
-            @RequestParam("pageNumber") int pageNumber,
-            @RequestParam("size") int size
-    ) {
-        return userService.getRatedUsers(PageRequest.of(pageNumber, size, Sort.by("score").descending()));
-    }
+  @GetMapping("/rated")
+  public PageDto<RatedUserDto> getRatedUsers(
+      @RequestParam("pageNumber") int pageNumber,
+      @RequestParam("size") int size
+  ) {
+    return userService.getRatedUsers(PageRequest.of(pageNumber, size, Sort.by("score").descending()));
+  }
 
-    @PatchMapping("/username")
-    public ResponseEntity<String> updateNickname(@RequestBody NicknameDto nicknameDto) {
-        userService.updateNickname(nicknameDto);
-        return ResponseEntity.ok("Updated successfully");
-    }
+  @PatchMapping("/username")
+  public ResponseEntity<String> updateNickname(@RequestBody NicknameDto nicknameDto) {
+    userService.updateNickname(nicknameDto);
+    return ResponseEntity.ok("Updated successfully");
+  }
 }

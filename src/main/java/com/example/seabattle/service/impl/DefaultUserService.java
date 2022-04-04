@@ -41,9 +41,9 @@ public class DefaultUserService implements UserService {
     public PageDto<RatedUserDto> getRatedUsers(PageRequest pageRequest) {
         Page<RatedUserProjection> page = userRepository.findRatedUsersBy(pageRequest);
         return new PageDto<>(
-            page.getTotalPages(),
-            page.map(userMapper::toRatedUser).stream()
-                    .collect(Collectors.toList())
+                page.getTotalPages(),
+                page.map(userMapper::toRatedUser).stream()
+                        .collect(Collectors.toList())
         );
     }
 

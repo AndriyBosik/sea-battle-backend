@@ -9,7 +9,7 @@ import com.example.seabattle.dto.UserStatsDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-@Mapper(componentModel = "spring")
+@Mapper
 public interface UserMapper {
     UserDto toUser(UserEntity entity);
 

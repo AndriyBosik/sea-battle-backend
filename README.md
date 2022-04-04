@@ -3,6 +3,7 @@
 ## Docker
 
 To run this project in docker you need to do 2 steps:
+
 1) Build docker image:
 
 `docker build -t sea_battle .`
