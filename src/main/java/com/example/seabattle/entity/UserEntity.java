@@ -10,17 +10,17 @@ import javax.persistence.*;
 @Entity
 @Table(name = "users")
 public class UserEntity {
-    @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+  @Id
+  @Column(name = "id")
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-    @Column(name = "nickname", nullable = false)
-    private String nickname;
+  @Column(name = "nickname", nullable = false)
+  private String nickname;
 
-    @Column(name = "score")
-    private int score;
+  @Column(name = "score")
+  private int score;
 
-    @Column(name = "coins")
-    private int coins;
+  @Column(name = "coins")
+  private int coins;
 }

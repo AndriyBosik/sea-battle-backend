@@ -18,38 +18,38 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class DefaultUserService implements UserService {
-    private final UserMapper userMapper;
-    private final UserRepository userRepository;
+  private final UserMapper userMapper;
+  private final UserRepository userRepository;
 
-    @Override
-    public Optional<UserDto> findByNickname(String nickname) {
-        UserEntity entity = userRepository.findByNicknameIgnoreCase(nickname);
-        return Optional.ofNullable(userMapper.toUser(entity));
-    }
+  @Override
+  public Optional<UserDto> findByNickname(String nickname) {
+    UserEntity entity = userRepository.findByNicknameIgnoreCase(nickname);
+    return Optional.ofNullable(userMapper.toUser(entity));
+  }
 
-    @Override
-    public void createUser(UserDto userDto) {
-        userRepository.save(userMapper.toUnsavedEntity(userDto));
-    }
+  @Override
+  public void createUser(UserDto userDto) {
+    userRepository.save(userMapper.toUnsavedEntity(userDto));
+  }
 
-    @Override
-    public Optional<UserStatsDto> getUserWithStats(String nickname) {
-        return Optional.ofNullable(userMapper.toUserStats(userRepository.findStatsByNickname(nickname)));
-    }
+  @Override
+  public Optional<UserStatsDto> getUserWithStats(String nickname) {
+    return Optional.ofNullable(userMapper.toUserStats(userRepository.findStatsByNickname(nickname)));
+  }
 
-    @Override
-    public PageDto<RatedUserDto> getRatedUsers(PageRequest pageRequest) {
-        Page<RatedUserProjection> page = userRepository.findRatedUsersBy(pageRequest);
-        return new PageDto<>(
-                page.getTotalPages(),
-                page.map(userMapper::toRatedUser).stream()
-                        .collect(Collectors.toList())
-        );
-    }
+  @Override
+  public PageDto<RatedUserDto> getRatedUsers(PageRequest pageRequest) {
+    Page<RatedUserProjection> page = userRepository.findRatedUsersBy(pageRequest);
+    return new PageDto<>(
+        page.getTotalPages(),
+        page.map(userMapper::toRatedUser).stream()
+            .collect(Collectors.toList())
+    );
+  }
 
-    @Transactional
-    @Override
-    public void updateNickname(NicknameDto nicknameDto) {
-        userRepository.updateUsername(nicknameDto.getOldNickname(), nicknameDto.getNewNickname());
-    }
+  @Transactional
+  @Override
+  public void updateNickname(NicknameDto nicknameDto) {
+    userRepository.updateUsername(nicknameDto.getOldNickname(), nicknameDto.getNewNickname());
+  }
 }

@@ -1,7 +1,7 @@
 package com.example.seabattle.entity.projection;
 
 public interface RatedUserProjection {
-    String getNickname();
+  String getNickname();
 
-    int getScore();
+  int getScore();
 }

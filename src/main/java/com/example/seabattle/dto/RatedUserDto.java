@@ -6,6 +6,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class RatedUserDto {
-    private String nickname;
-    private int score;
+  private String nickname;
+  private int score;
 }

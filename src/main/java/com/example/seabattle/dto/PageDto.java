@@ -10,6 +10,6 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 public class PageDto<T> {
-    private int totalPages;
-    private List<T> items;
+  private int totalPages;
+  private List<T> items;
 }

@@ -1,9 +1,9 @@
 package com.example.seabattle.entity.projection;
 
 public interface UserStatsProjection {
-    String getNickname();
+  String getNickname();
 
-    int getScore();
+  int getScore();
 
-    int getCoins();
+  int getCoins();
 }

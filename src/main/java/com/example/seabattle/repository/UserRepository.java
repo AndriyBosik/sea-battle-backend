@@ -11,15 +11,15 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 public interface UserRepository extends JpaRepository<UserEntity, Long> {
-    UserEntity findByNicknameIgnoreCase(String nickname);
+  UserEntity findByNicknameIgnoreCase(String nickname);
 
-    UserStatsProjection findStatsByNickname(String nickname);
+  UserStatsProjection findStatsByNickname(String nickname);
 
-    Page<RatedUserProjection> findRatedUsersBy(Pageable pageable);
+  Page<RatedUserProjection> findRatedUsersBy(Pageable pageable);
 
-    @Modifying
-    @Query("update UserEntity u set u.nickname = :newNickname where u.nickname = :oldNickname")
-    void updateUsername(
-            @Param(value = "oldNickname") String oldNickname,
-            @Param(value = "newNickname") String newNickname);
+  @Modifying
+  @Query("update UserEntity u set u.nickname = :newNickname where u.nickname = :oldNickname")
+  void updateUsername(
+      @Param(value = "oldNickname") String oldNickname,
+      @Param(value = "newNickname") String newNickname);
 }
