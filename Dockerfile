@@ -4,16 +4,23 @@ WORKDIR /workspace/app
 COPY gradle gradle
 COPY build.gradle settings.gradle gradlew ./
 COPY src src
+COPY .javaenv .javaenv
+COPY app-runner.sh app-runner.sh
 
 RUN ./gradlew bootJar -x test
 
-FROM openjdk:11-jdk-slim
+FROM alpine:latest
+
+ENV JAVA_HOME="/usr/lib/jvm/default-jvm/"
+RUN apk add openjdk11 bash
+
+ENV PATH=$PATH:${JAVA_HOME}/bin
+
 VOLUME /tmp
 ARG DEPENDENCY=/workspace/app
 
-ENV USERNAME_ENV=username
-ENV PASSWORD_ENV=password
-ENV URL_ENV=jdbc:postgresql://localhost:5432/sea_battle
-
 COPY --from=build ${DEPENDENCY}/build/libs/*.jar ./app.jar
-ENTRYPOINT java -jar -DDATASOURCE_URL=$URL_ENV -DDATASOURCE_USERNAME=$USERNAME_ENV -DDATASOURCE_PASSWORD=$PASSWORD_ENV app.jar
+COPY --from=build ${DEPENDENCY}/.javaenv ./.javaenv
+COPY --from=build ${DEPENDENCY}/app-runner.sh ./app-runner.sh
+
+ENTRYPOINT bash ./app-runner.sh .javaenv app.jar
