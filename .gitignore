@@ -122,4 +122,4 @@ gradle-app.setting
 
 # Other
 *.iml
-.env
+.javaenv
