@@ -1,3 +1,9 @@
-DATASOURCE_URL=
-DATASOURCE_USERNAME=
-DATASOURCE_PASSWORD=
+DATASOURCE_URL=jdbc:postgresql://localhost:5432/sea_battle
+DATASOURCE_USERNAME=postgres
+DATASOURCE_PASSWORD=postgres
+
+AUTH_SCOPE=openid refresh_token
+AUTH_ISSUER=https://issuer.com/
+AUTH_AUDIENCE=https://example.com
+AUTH_CLIENT_ID=client-id
+AUTH_CLIENT_SECRET=client-secret

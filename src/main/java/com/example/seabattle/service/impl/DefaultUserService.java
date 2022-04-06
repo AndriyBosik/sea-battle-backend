@@ -28,8 +28,12 @@ public class DefaultUserService implements UserService {
   }
 
   @Override
-  public void createUser(UserDto userDto) {
-    userRepository.save(userMapper.toUnsavedEntity(userDto));
+  public IdDto createUser(UserDto userDto) {
+    UserEntity userEntity = userMapper.toUnsavedEntity(userDto);
+    userRepository.save(userEntity);
+    return new IdDto(
+        userEntity.getId()
+    );
   }
 
   @Override

@@ -8,7 +8,7 @@ import java.util.Optional;
 public interface UserService {
   Optional<UserDto> findByNickname(String nickname);
 
-  void createUser(UserDto userDto);
+  IdDto createUser(UserDto userDto);
 
   Optional<UserStatsDto> getUserWithStats(String nickname);
 
