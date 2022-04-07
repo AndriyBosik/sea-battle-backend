@@ -10,7 +10,7 @@ public interface UserService {
 
   IdDto createUser(UserDto userDto);
 
-  Optional<UserStatsDto> getUserWithStats(String nickname);
+  Optional<UserStatsDto> getUserWithStats();
 
   PageDto<RatedUserDto> getRatedUsers(PageRequest pageRequest);
 

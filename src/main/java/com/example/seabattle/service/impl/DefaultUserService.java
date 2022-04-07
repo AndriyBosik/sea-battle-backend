@@ -5,6 +5,7 @@ import com.example.seabattle.entity.UserEntity;
 import com.example.seabattle.entity.projection.RatedUserProjection;
 import com.example.seabattle.mapper.UserMapper;
 import com.example.seabattle.repository.UserRepository;
+import com.example.seabattle.service.UserContext;
 import com.example.seabattle.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -19,6 +20,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class DefaultUserService implements UserService {
   private final UserMapper userMapper;
+  private final UserContext userContext;
   private final UserRepository userRepository;
 
   @Override
@@ -37,7 +39,8 @@ public class DefaultUserService implements UserService {
   }
 
   @Override
-  public Optional<UserStatsDto> getUserWithStats(String nickname) {
+  public Optional<UserStatsDto> getUserWithStats() {
+    String nickname = userContext.getUserNickname();
     return Optional.ofNullable(userMapper.toUserStats(userRepository.findStatsByNickname(nickname)));
   }
 

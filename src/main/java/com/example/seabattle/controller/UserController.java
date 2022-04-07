@@ -16,19 +16,9 @@ import java.util.Optional;
 public class UserController {
   private final UserService userService;
 
-  @GetMapping("/{nickname}")
-  public Optional<UserDto> findByNickname(@PathVariable String nickname) {
-    return userService.findByNickname(nickname);
-  }
-
-  @PostMapping
-  public void createUser(@RequestBody UserDto userDto) {
-    userService.createUser(userDto);
-  }
-
-  @GetMapping("/{nickname}/stats")
-  public Optional<UserStatsDto> getUserStats(@PathVariable String nickname) {
-    return userService.getUserWithStats(nickname);
+  @GetMapping("/stats")
+  public Optional<UserStatsDto> getUserStats() {
+    return userService.getUserWithStats();
   }
 
   @GetMapping("/rated")
