@@ -1,8 +1,6 @@
 package com.example.seabattle.controller;
 
-import com.example.seabattle.dto.IdDto;
-import com.example.seabattle.dto.PasswordlessRegisterDto;
-import com.example.seabattle.dto.RegisterDto;
+import com.example.seabattle.dto.*;
 import com.example.seabattle.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,5 +22,10 @@ public class AuthController {
   @PostMapping("/register")
   public IdDto register(@RequestBody RegisterDto registerDto) {
     return authService.register(registerDto);
+  }
+
+  @PostMapping("/login")
+  public TokenDto login(@RequestBody LoginDto loginDto) {
+    return authService.login(loginDto);
   }
 }

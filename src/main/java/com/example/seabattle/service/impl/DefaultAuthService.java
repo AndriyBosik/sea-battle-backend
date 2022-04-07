@@ -1,8 +1,6 @@
 package com.example.seabattle.service.impl;
 
-import com.example.seabattle.dto.IdDto;
-import com.example.seabattle.dto.PasswordlessRegisterDto;
-import com.example.seabattle.dto.RegisterDto;
+import com.example.seabattle.dto.*;
 import com.example.seabattle.mapper.UserMapper;
 import com.example.seabattle.service.AuthProviderService;
 import com.example.seabattle.service.AuthService;
@@ -25,5 +23,10 @@ public class DefaultAuthService implements AuthService {
   @Override
   public IdDto registerPasswordless(PasswordlessRegisterDto passwordlessRegisterDto) {
     return userService.createUser(userMapper.toUser(passwordlessRegisterDto));
+  }
+
+  @Override
+  public TokenDto login(LoginDto loginDto) {
+    return authProviderService.login(loginDto);
   }
 }

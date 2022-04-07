@@ -10,8 +10,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   @Override
   protected void configure(HttpSecurity http) throws Exception {
     http.authorizeRequests()
-        .antMatchers(HttpMethod.POST, "/api/auth/register/passwordless", "/api/auth/register").permitAll()
-        .antMatchers(HttpMethod.GET, "/api/users/rated").permitAll()
+        .antMatchers(HttpMethod.POST, "/api/auth/register/passwordless", "/api/auth/register", "/api/auth/login").permitAll()
         .anyRequest()
         .authenticated()
         .and()

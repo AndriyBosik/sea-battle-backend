@@ -13,7 +13,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = "auth")
 public class AuthProperties {
   private String issuer;
-  private String domain;
+  private String scope;
   private String audience;
   private String clientId;
   private String clientSecret;
