@@ -12,9 +12,12 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @AllArgsConstructor
 @ConfigurationProperties(prefix = "auth")
 public class AuthProperties {
-  private String issuer;
   private String scope;
+  private String issuer;
   private String audience;
   private String clientId;
   private String clientSecret;
+  private String dummyPassword;
+  private String defaultEmailDomain;
+  private String managementApiAudience;
 }

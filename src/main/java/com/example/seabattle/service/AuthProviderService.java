@@ -1,12 +1,11 @@
 package com.example.seabattle.service;
 
-import com.example.seabattle.dto.IdDto;
-import com.example.seabattle.dto.LoginDto;
-import com.example.seabattle.dto.RegisterDto;
-import com.example.seabattle.dto.TokenDto;
+import com.example.seabattle.dto.*;
 
 public interface AuthProviderService {
-  IdDto register(RegisterDto registerDto);
+  TokenDto registerPasswordless(PasswordlessRegisterDto passwordlessRegisterDto);
+
+  TokenDto updatePassword(PasswordDto passwordDto);
 
   TokenDto login(LoginDto loginDto);
 }
