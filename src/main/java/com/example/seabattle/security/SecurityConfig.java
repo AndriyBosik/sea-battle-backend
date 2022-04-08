@@ -1,4 +1,4 @@
-package com.example.seabattle.config;
+package com.example.seabattle.security;
 
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -10,7 +10,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   @Override
   protected void configure(HttpSecurity http) throws Exception {
     http.authorizeRequests()
-        .antMatchers(HttpMethod.POST, "/api/auth/register/passwordless", "/api/auth/register", "/api/auth/login").permitAll()
+        .antMatchers(
+            HttpMethod.POST,
+            "/api/auth/register/passwordless",
+            "/api/auth/register",
+            "/api/auth/login",
+            "/api/auth/token")
+        .permitAll()
         .anyRequest()
         .authenticated()
         .and()

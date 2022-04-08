@@ -1,5 +1,7 @@
 package com.example.seabattle.service.auth0;
 
 public interface ManagementApi {
-  void changePassword(String userId, String newPassword);
+  void updatePassword(String userId, String newPassword);
+
+  void updateNicknameAndEmail(String userId, String nickname, String email);
 }

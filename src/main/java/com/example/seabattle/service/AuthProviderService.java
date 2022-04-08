@@ -8,4 +8,8 @@ public interface AuthProviderService {
   TokenDto updatePassword(PasswordDto passwordDto);
 
   TokenDto login(LoginDto loginDto);
+
+  void updateUserNickname(NicknameDto nicknameDto);
+
+  TokenDto refreshAccessToken(RefreshTokenDto refreshTokenDto);
 }

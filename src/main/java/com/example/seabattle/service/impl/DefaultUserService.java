@@ -57,6 +57,6 @@ public class DefaultUserService implements UserService {
   @Transactional
   @Override
   public void updateNickname(NicknameDto nicknameDto) {
-    userRepository.updateUsername(nicknameDto.getOldNickname(), nicknameDto.getNewNickname());
+    userRepository.updateUsername(userContext.getUserNickname(), nicknameDto.getNewNickname());
   }
 }

@@ -9,6 +9,6 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class NicknameDto {
-  private String newNickname;
+public class RefreshTokenDto {
+  private String refreshToken;
 }

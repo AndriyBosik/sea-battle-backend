@@ -12,7 +12,7 @@ public class BeanConfig {
   private final AuthProperties authProperties;
 
   @Bean
-  public AuthAPI auth0Api() {
+  public AuthAPI authApi() {
     return new AuthAPI(
         authProperties.getIssuer(),
         authProperties.getClientId(),

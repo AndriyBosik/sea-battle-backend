@@ -48,7 +48,7 @@ public class Auth0ProviderService implements AuthProviderService {
 
   @Override
   public TokenDto updatePassword(PasswordDto passwordDto) {
-    managementApi.changePassword(
+    managementApi.updatePassword(
         userContext.getAuthProviderUserId(),
         passwordDto.getPassword());
      return login(new LoginDto(
@@ -61,6 +61,22 @@ public class Auth0ProviderService implements AuthProviderService {
     TokenHolder tokenHolder = authenticationApi.login(
         toEmail(loginDto.getNickname()),
         loginDto.getPassword());
+    return tokenMapper.toDto(tokenHolder);
+  }
+
+  @Transactional
+  @Override
+  public void updateUserNickname(NicknameDto nicknameDto) {
+    userService.updateNickname(nicknameDto);
+    managementApi.updateNicknameAndEmail(
+        userContext.getAuthProviderUserId(),
+        nicknameDto.getNewNickname(),
+        toEmail(nicknameDto.getNewNickname()));
+  }
+
+  @Override
+  public TokenDto refreshAccessToken(RefreshTokenDto refreshTokenDto) {
+    TokenHolder tokenHolder = authenticationApi.refreshAccessToken(refreshTokenDto.getRefreshToken());
     return tokenMapper.toDto(tokenHolder);
   }
 

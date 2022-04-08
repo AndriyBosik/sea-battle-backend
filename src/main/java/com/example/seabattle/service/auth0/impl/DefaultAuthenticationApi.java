@@ -38,4 +38,9 @@ public class DefaultAuthenticationApi implements AuthenticationApi {
         Auth0Data.CONNECTION);
     return requestExecutor.executeRequest(request);
   }
+
+  @Override
+  public TokenHolder refreshAccessToken(String refreshToken) {
+    return requestExecutor.executeRequest(auth0Api.renewAuth(refreshToken));
+  }
 }
