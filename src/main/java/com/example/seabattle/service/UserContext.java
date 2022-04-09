@@ -1,7 +1,13 @@
 package com.example.seabattle.service;
 
+import com.example.seabattle.model.UserPrincipal;
+
 public interface UserContext {
   String getAuthProviderUserId();
 
-  String getUserNickname();
+  String getUserEmail();
+
+  Long getUserId();
+
+  UserPrincipal getUser();
 }

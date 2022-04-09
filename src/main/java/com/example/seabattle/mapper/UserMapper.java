@@ -3,7 +3,9 @@ package com.example.seabattle.mapper;
 import com.example.seabattle.dto.*;
 import com.example.seabattle.entity.UserEntity;
 import com.example.seabattle.entity.projection.RatedUserProjection;
+import com.example.seabattle.entity.projection.UserContextProjection;
 import com.example.seabattle.entity.projection.UserStatsProjection;
+import com.example.seabattle.model.UserPrincipal;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -11,11 +13,7 @@ import org.mapstruct.Mapping;
 public interface UserMapper {
   UserDto toUser(UserEntity entity);
 
-  UserDto toUser(RegisterDto registerDto);
-
-  UserDto toUser(PasswordlessRegisterDto nicknameDto);
-
-  UserEntity toUserEntity(UserDto model);
+  UserPrincipal toPrincipal(String email, UserContextProjection userContextProjection);
 
   @Mapping(target = "id", ignore = true)
   UserEntity toUnsavedEntity(UserDto model);

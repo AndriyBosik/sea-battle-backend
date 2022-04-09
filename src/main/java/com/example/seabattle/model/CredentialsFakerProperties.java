@@ -10,12 +10,9 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ConfigurationProperties(prefix = "auth")
-public class AuthProperties {
-  private String scope;
-  private String issuer;
-  private String audience;
-  private String clientId;
-  private String clientSecret;
-  private String managementApiAudience;
+@ConfigurationProperties(prefix = "credentials-faker")
+public class CredentialsFakerProperties {
+  private String emailPrefix;
+  private String emailDomain;
+  private String dummyPassword;
 }

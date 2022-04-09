@@ -22,10 +22,9 @@ public class DefaultManagementApi implements ManagementApi {
   }
 
   @Override
-  public void updateNicknameAndEmail(String userId, String nickname, String email) {
+  public void updateNickname(String userId, String nickname) {
     User newUser = new User();
     newUser.setNickname(nickname);
-    newUser.setEmail(email);
     updateUser(userId, newUser);
   }
 

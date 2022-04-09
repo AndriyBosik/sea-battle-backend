@@ -15,4 +15,6 @@ public interface UserService {
   PageDto<RatedUserDto> getRatedUsers(PageRequest pageRequest);
 
   void updateNickname(NicknameDto nicknameDto);
+
+  Optional<IdDto> getUserId(String nickname);
 }

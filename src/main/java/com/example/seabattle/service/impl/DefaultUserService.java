@@ -40,8 +40,8 @@ public class DefaultUserService implements UserService {
 
   @Override
   public Optional<UserStatsDto> getUserWithStats() {
-    String nickname = userContext.getUserNickname();
-    return Optional.ofNullable(userMapper.toUserStats(userRepository.findStatsByNickname(nickname)));
+    Long userId = userContext.getUserId();
+    return Optional.ofNullable(userMapper.toUserStats(userRepository.findStatsById(userId)));
   }
 
   @Override
@@ -57,6 +57,15 @@ public class DefaultUserService implements UserService {
   @Transactional
   @Override
   public void updateNickname(NicknameDto nicknameDto) {
-    userRepository.updateUsername(userContext.getUserNickname(), nicknameDto.getNewNickname());
+    userRepository.updateUsername(userContext.getUserId(), nicknameDto.getNewNickname());
+  }
+
+  @Override
+  public Optional<IdDto> getUserId(String nickname) {
+    Long userId = userRepository.findUserIdByNickname(nickname);
+    if (userId == null) {
+      return Optional.empty();
+    }
+    return Optional.of(new IdDto(userId));
   }
 }
