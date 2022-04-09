@@ -56,7 +56,6 @@ public class Auth0ProviderService implements AuthProviderService {
     managementApi.updatePassword(
         userContext.getAuthProviderUserId(),
         passwordDto.getPassword());
-    System.out.println(userContext.getUser().getEmail());
      return login(new LoginDto(
          userContext.getUser().getNickname(),
          passwordDto.getPassword()));
